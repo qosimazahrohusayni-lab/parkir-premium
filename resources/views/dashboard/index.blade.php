@@ -24,5 +24,18 @@
             <strong>{{ $stats['total_transaksi'] }}</strong>
         </div>
     </div>
+
+    <div class="panel-box">
+        <h3>Aktivitas Terbaru</h3>
+        <ul class="activity-list">
+            @foreach ($recentLogs as $log)
+                <li>
+                    <strong>{{ $log->user->name ?? 'System' }}</strong>
+                    <span>{{ $log->aktivitas }}</span>
+                    <small>{{ $log->created_at->format('d M Y H:i') }}</small>
+                </li>
+            @endforeach
+        </ul>
+    </div>
 </div>
 @endsection

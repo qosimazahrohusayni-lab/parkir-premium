@@ -19,17 +19,17 @@
 
             <nav>
                 <a href="{{ route('dashboard') }}">Dashboard</a>
-                <a href="{{ route('owner.transaksi') }}">Owner - Rekap transaksi</a>
+                <a href="{{ route('owner.transaksi') }}">Owner - Transaksi</a>
                 <a href="{{ route('owner.rekap') }}">Owner - Rekap</a>
-                <a href="#">Admin - User</a>
-                <a href="#">Admin - Tarif parkir</a>
-                <a href="#">Admin - Area parkir</a>
-                <a href="#">Admin - Kendaraan</a>
-                <a href="#">Admin - Log aktivitas</a>
-                <a href="#">Petugas - Transaksi</a>
-                <a href="#">Petugas - Cetak struk</a>
+                <a href="{{ route('admin.users.index') }}">Admin - User</a>
+                <a href="{{ route('admin.tarif.index') }}">Admin - Tarif</a>
+                <a href="{{ route('admin.area.index') }}">Admin - Area</a>
+                <a href="{{ route('admin.kendaraan.index') }}">Admin - Kendaraan</a>
+                <a href="{{ route('admin.logs.index') }}">Admin - Log Aktivitas</a>
+                <a href="{{ route('petugas.transaksi') }}">Petugas - Transaksi</a>
+                <a href="{{ route('petugas.struk') }}">Petugas - Cetak Struk</a>
 
-                <form method="POST" action="{{ route('logout') }}" style="margin-top: 24px;">
+                <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="logout-btn">Logout</button>
                 </form>

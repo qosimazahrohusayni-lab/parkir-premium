@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'name',
@@ -23,18 +24,18 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function isOwner(): bool
+    public function scopeOwner($query)
     {
-        return $this->role === 'owner';
+        return $query->where('role', 'owner');
     }
 
-    public function isAdmin(): bool
+    public function scopeAdmin($query)
     {
-        return $this->role === 'admin';
+        return $query->where('role', 'admin');
     }
 
-    public function isPetugas(): bool
+    public function scopePetugas($query)
     {
-        return $this->role === 'petugas';
+        return $query->where('role', 'petugas');
     }
 }

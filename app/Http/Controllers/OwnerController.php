@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
+use App\Models\TransaksiParkir;
+use Illuminate\Support\Facades\Auth;
+
 class OwnerController extends Controller
 {
-    public function transaksi(Request $request)
+    public function transaksi()
     {
-        $data = [
-            ['kode' => 'TRX-001', 'jam_masuk' => '07:20', 'plat' => 'B 1234 ABC', 'tarif' => 'Rp 5.000', 'status' => 'Selesai'],
-            ['kode' => 'TRX-002', 'jam_masuk' => '08:15', 'plat' => 'AB 9999 ZY', 'tarif' => 'Rp 12.000', 'status' => 'Selesai'],
-        ];
-
-        return view('owner.transaksi', ['data' => $data]);
+        $transaksis = TransaksiParkir::with(['kendaraan', 'area'])->latest()->get();
+        return view('owner.transaksi', compact('transaksis'));
     }
 
     public function rekap()
     {
+        $total = TransaksiParkir::sum('total_biaya');
+        $transaksis = TransaksiParkir::count();
+
         return view('owner.rekap', [
-            'total' => 'Rp 18.650.000',
-            'periode' => 'Bulan Ini',
+            'total' => 'Rp ' . number_format($total, 0, ',', '.'),
+            'periode' => 'Bulan ini',
+            'transaksis' => $transaksis,
         ]);
     }
 }
